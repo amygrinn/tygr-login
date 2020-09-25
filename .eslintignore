@@ -1,4 +1,5 @@
 node_modules
-bin
+lib
+dist
 webpack.config.js
 wdio.conf.js
