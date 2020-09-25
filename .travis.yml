@@ -12,7 +12,7 @@ env:
 install:
   - npm ci --production=false
   - cd tests
-  - npm ci
+  - npm ci --production=false
   - cd ..
   - npm run setup
 
