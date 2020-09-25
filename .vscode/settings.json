@@ -1,0 +1,10 @@
+{
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "cmd": "yarn build",
+        "match": "src\\\\.*"
+      }
+    ]
+  }
+}
