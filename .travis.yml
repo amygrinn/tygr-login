@@ -1,0 +1,30 @@
+---
+os: linux
+dist: xenial
+language: node_js
+node_js: lts/*
+addons:
+  chrome: stable
+
+env:
+  global:
+    - NODE_ENV=production
+
+jobs:
+  include:
+    - stage: test
+      script: npm run quality:check
+    - script:
+        - npm run test:setup
+        - npm run build
+        - npm test
+# deploy:
+#   - provider: npm
+#     edge: true
+#     email: tylergrinn@gmail.com
+#     skip_cleanup: true
+#     api_key:
+#       secure: osMW6xEQn2v4jP61I6kphIuBjSVxTLgor2nDEzFmNy3Cn2Vaav6sv2rkyqPZTntXupmCAOdf9ExC14pf5z+IAPcx+j6bKC17LhRNFAjzk1uxY76QMnGcd0kboJVQfUHVouaZskzFjU7ccGTQjxUhQGcAD4/2W8ugDmjpOcYrWrxZZ0SyVr7TZrdi4hvi+e/ZUfJmuKkeimEjdqiHujxMuM1Lo4x5rbgCNH8j/fKoorp9lSh8UIOJwC3M4tYHt5lAcSEQGAYE3SlM09hCicqZi+2APiiNn0oxYMeZtM40cmtXgRQPU/lbapvFVmGTtZGN7Xjxea6/hC1rpNIV0ayGERZOng6qSdAxrrAst1Du+91m/tqASYCBDBLnD6fmGnkFdNlF0OAZKJlzZHKK5i62EnsGPmxtnsj49Eq3rd+f/RH6VV5wtGTRvxzRF+Uv6NmhKGses8ijom1BalINISpNTMoKWnIZ61jB4uGQVky7j7Rz22X+u4Voy6awglvlQdggvUGFZhmDIgtpa4EQbjjZBJRT/m1kbV+I/29bpW5ETUdxn49g6w3RX8uzCpZyhpMshcvT8QMCoFwH5aouAuEscMfBRu41S6tly0dfUgXlPFPxPJeubenShGwSGmGbMrs+tnnHt4QZPGaooCIDWLwo1EOEpn7uHDv68Tj8yvDuBRU=
+#     on:
+#       branch: master
+#       repo: '@tygr/login'
