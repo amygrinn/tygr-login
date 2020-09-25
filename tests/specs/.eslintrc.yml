@@ -1,0 +1,14 @@
+---
+root: true
+extends:
+  - alloy
+env:
+  mocha: true
+  jquery: true
+globals:
+  expect: true
+  browser: true
+plugins:
+  - chai-friendly
+rules:
+  no-invalid-this: 0

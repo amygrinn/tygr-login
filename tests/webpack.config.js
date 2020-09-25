@@ -3,6 +3,7 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -11,6 +12,9 @@ module.exports = {
     filename: '[name].js',
   },
   mode: 'development',
+  watchOptions: {
+    // aggregateTimeout: 4000,
+  },
   module: {
     rules: [
       {
@@ -28,5 +32,24 @@ module.exports = {
     clientLogLevel: 'silent',
     writeToDisk: true,
   },
-  plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'test-npm.html',
+      template: 'src/test-npm.html',
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'test-browser.html',
+      template: 'src/test-browser.html',
+      inject: false,
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: '../lib/tygr-login.min.js' },
+        { from: '../lib/tygr-login.min.js.map' },
+        { from: '../lib/main.css' },
+        { from: '../lib/main.css.map' },
+      ],
+    }),
+  ],
 };

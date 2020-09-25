@@ -1,5 +1,3 @@
-const { TimelineService } = require('wdio-timeline-reporter/timeline-service');
-
 exports.config = {
   runner: 'local',
   specs: ['./specs/**/*.spec.js'],
@@ -35,7 +33,6 @@ exports.config = {
         args: ['--silent'],
       },
     ],
-    [TimelineService],
   ],
   framework: 'mocha',
   reporters: ['spec'],
