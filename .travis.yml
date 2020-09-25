@@ -32,8 +32,3 @@ jobs:
         on:
           branch: master
           tags: true
-
-after_deploy:
-  - npm run setup:prod
-  - npm run build
-  - npm test

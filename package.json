@@ -11,7 +11,6 @@
   ],
   "scripts": {
     "setup": "npm link && cd tests && npm link @tygr/login && cd ..",
-    "setup:prod": "cd tests && npm i --no-save @tygr/login && cd ..",
     "teardown": "cd tests && npm unlink @tygr/login && cd .. && npm unlink",
     "clean": "rimraf lib",
     "build:plugin": "webpack",
