@@ -10,14 +10,14 @@
     "lib/*.d.ts"
   ],
   "scripts": {
+    "setup": "npm link && cd tests && npm link @tygr/login && cd ..",
+    "setup:prod": "cd tests && npm i --no-save @tygr/login && cd ..",
+    "teardown": "cd tests && npm unlink @tygr/login && cd .. && npm unlink",
     "clean": "rimraf lib",
     "build:plugin": "webpack",
     "build:tests": "npm run build --prefix tests",
     "build:all": "run-s build:plugin build:tests",
     "build": "run-s clean build:all",
-    "test:setup": "npm link && cd tests && npm link @tygr/login && cd ..",
-    "test:setup:prod": "cd tests && npm i --save @tygr/login && cd ..",
-    "test:teardown": "cd tests && npm unlink @tygr/login && cd .. && npm unlink",
     "test": "npm test --prefix tests",
     "start:plugin": "webpack --watch",
     "start:tests": "npm start --prefix tests",

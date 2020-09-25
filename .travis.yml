@@ -11,14 +11,16 @@ env:
 
 install:
   - npm ci --production=false
-  - npm ci --prefix tests
+  - cd tests
+  - npm ci
+  - cd ..
+  - npm run setup
 
 jobs:
   include:
     - stage: test
       script: npm run quality:check
     - script:
-        - npm run test:setup
         - npm run build
         - npm test
 
@@ -33,6 +35,6 @@ deploy:
   skip_cleanup: 'true'
 
 after_deploy:
-  - npm run test:setup:prod
+  - npm run setup:prod
   - npm run build
   - npm test
