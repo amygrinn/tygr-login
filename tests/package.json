@@ -20,6 +20,7 @@
   "author": "Tyler Grinn",
   "license": "ISC",
   "dependencies": {
+    "@tygr/login": "^1.0.0",
     "@wdio/cli": "^6.5.2",
     "@wdio/local-runner": "^6.5.2",
     "@wdio/mocha-framework": "^6.5.0",

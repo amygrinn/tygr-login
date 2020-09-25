@@ -1,4 +1,3 @@
----
 os: linux
 dist: xenial
 language: node_js
@@ -10,7 +9,9 @@ env:
   global:
     - NODE_ENV=production
 
-install: npm ci --production=false
+install:
+  - npm ci --production=false
+  - npm ci --prefix tests
 
 jobs:
   include:
@@ -20,13 +21,18 @@ jobs:
         - npm run test:setup
         - npm run build
         - npm test
-# deploy:
-#   - provider: npm
-#     edge: true
-#     email: tylergrinn@gmail.com
-#     skip_cleanup: true
-#     api_key:
-#       secure: osMW6xEQn2v4jP61I6kphIuBjSVxTLgor2nDEzFmNy3Cn2Vaav6sv2rkyqPZTntXupmCAOdf9ExC14pf5z+IAPcx+j6bKC17LhRNFAjzk1uxY76QMnGcd0kboJVQfUHVouaZskzFjU7ccGTQjxUhQGcAD4/2W8ugDmjpOcYrWrxZZ0SyVr7TZrdi4hvi+e/ZUfJmuKkeimEjdqiHujxMuM1Lo4x5rbgCNH8j/fKoorp9lSh8UIOJwC3M4tYHt5lAcSEQGAYE3SlM09hCicqZi+2APiiNn0oxYMeZtM40cmtXgRQPU/lbapvFVmGTtZGN7Xjxea6/hC1rpNIV0ayGERZOng6qSdAxrrAst1Du+91m/tqASYCBDBLnD6fmGnkFdNlF0OAZKJlzZHKK5i62EnsGPmxtnsj49Eq3rd+f/RH6VV5wtGTRvxzRF+Uv6NmhKGses8ijom1BalINISpNTMoKWnIZ61jB4uGQVky7j7Rz22X+u4Voy6awglvlQdggvUGFZhmDIgtpa4EQbjjZBJRT/m1kbV+I/29bpW5ETUdxn49g6w3RX8uzCpZyhpMshcvT8QMCoFwH5aouAuEscMfBRu41S6tly0dfUgXlPFPxPJeubenShGwSGmGbMrs+tnnHt4QZPGaooCIDWLwo1EOEpn7uHDv68Tj8yvDuBRU=
-#     on:
-#       branch: master
-#       repo: '@tygr/login'
+
+deploy:
+  provider: npm
+  email: tylergrinn@gmail.com
+  api_key:
+    secure: z+7dzS7J8IWByzG/j7HQDXtGU8HONRQ9/uAN8r43/e8PxoGAwJd3IxyKefUUaPtA3wcHHhYu0fahdM8gl0QVWaVge2LNun1BZtLL8vAIieH2ySLbGZsqsxeIv9WAJId0WPuFcUd5wyoR6HqvDN2VSlKpPtE4RFOWv9OaZBsWERuIjg55ItWbHFUSbghKlZkyA9oeu2mBLZ5v4vJrdqoXpV1L54WRhSOEgfcWSi3sYmX45As39xF8s3yxXRf5vF2XcLi1/Svc1Q0lFVQWNntVWqP3caCqcQtKnLfSes+mSWN7lFxytrHYsR/fT3ZHefxB3JhAjTzsTpHRNd2hNugRKD4jg+uaK5OB7YhV2RmEeg+kA+HNDwsxrb85Q54CMw+b3QwdhvcKlsozJPhcqpLuMbem9bLVVcVvj1lQ+Qe4uhN3WQXfjq+TDrQYlkwn3/GGgztpRoC48u6pCrW1ZqD2OYF/ZNNCHdpKKJJ26jsaJEpM/0Gou8s3mWEb2TbNlL5qGST74HLDDGl3TCInffQBHpN/J0t+uHD3qhmnyi+Kl8eYBH6DwIxLiWPY/hl/N9QqrpmNI6LNxjeZtsEORzvvncT/W9aDARsxHttDrqGhd+n28o8CplFBa4bfOX5m1k1d0P+XdN/ZK1NPKQigEwNMSUPthhvj+e5X/YivUUwfVPc=
+  on:
+    tags: true
+    repo: tylergrinn/tygr-login
+  skip_cleanup: 'true'
+
+after_deploy:
+  - npm run test:setup:prod
+  - npm run build
+  - npm test
