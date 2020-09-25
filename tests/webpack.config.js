@@ -45,10 +45,8 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: '../lib/tygr-login.min.js' },
-        { from: '../lib/tygr-login.min.js.map' },
-        { from: '../lib/main.css' },
-        { from: '../lib/main.css.map' },
+        { from: '../lib/tygr-login.min.js(|.map)', to: 'dist' },
+        { from: '../lib/main.css(|.map)', to: 'dist' },
       ],
     }),
   ],
