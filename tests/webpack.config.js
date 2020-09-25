@@ -12,9 +12,6 @@ module.exports = {
     filename: '[name].js',
   },
   mode: 'development',
-  watchOptions: {
-    // aggregateTimeout: 4000,
-  },
   module: {
     rules: [
       {
