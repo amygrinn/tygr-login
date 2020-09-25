@@ -10,6 +10,8 @@ env:
   global:
     - NODE_ENV=production
 
+install: npm ci --production=false
+
 jobs:
   include:
     - stage: test
