@@ -4,6 +4,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const ROOT_LIB_DIR = path.join(__dirname, '..', 'lib');
 
 module.exports = {
   entry: './src/index.ts',
@@ -18,6 +21,10 @@ module.exports = {
         test: /\.[tj]sx?$/,
         exclude: /[\\/]node_modules[\\/]/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.css$/i,
+        loader: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
   },
@@ -42,9 +49,12 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: '../lib/tygr-login.min.js(|.map)', to: 'dist' },
-        { from: '../lib/main.css(|.map)', to: 'dist' },
+        {
+          from: path.join(ROOT_LIB_DIR),
+          to: 'lib',
+        },
       ],
     }),
+    new MiniCssExtractPlugin(),
   ],
 };

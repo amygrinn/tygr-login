@@ -22,7 +22,7 @@ exports.config = {
   ],
   logLevel: 'silent',
   bail: 0,
-  baseUrl: 'http://localhost:8080',
+  baseUrl: 'http://localhost:8081',
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,

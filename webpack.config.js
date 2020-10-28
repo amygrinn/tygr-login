@@ -4,9 +4,12 @@ const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+const CopyPlugin = require('copy-webpack-plugin');
+
+const STYLES_DIR = path.join('src', 'styles', path.sep);
 
 const common = {
-  entry: './src/index.ts',
+  entry: './src/tygr-login.ts',
   output: {
     path: path.join(__dirname, 'lib'),
   },
@@ -52,7 +55,7 @@ const common = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({ filename: 'tygr-login.min.css' }),
     ...(process.env.NODE_ENV === 'production'
       ? [
           new BundleAnalyzerPlugin({
@@ -76,12 +79,13 @@ module.exports = [
   }),
   merge(common, {
     output: {
-      filename: 'index.js',
+      filename: 'tygr-login.js',
       libraryTarget: 'umd',
       library: 'tygr-login',
       umdNamedDefine: true,
     },
     externals: [nodeExternals()],
     mode: 'development',
+    plugins: [new CopyPlugin({ patterns: [path.join('src', 'styles')] })],
   }),
 ];

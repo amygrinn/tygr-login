@@ -1,4 +1,4 @@
 import Login from './Login';
-import './styles/main.scss';
+import './styles/tygr-login.scss';
 
 export { Login };
